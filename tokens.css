@@ -1,0 +1,184 @@
+/* Wren Law Firm — Design Tokens (2026 redesign) */
+:root {
+  /* Brand */
+  --navy: #19283f;
+  --navy-ink: #0f1a2b;      /* pressed/deeper */
+  --navy-soft: #2b3a52;     /* for subheads on light */
+  --gold: #b69d74;
+  --gold-deep: #9c8560;     /* hover */
+  --gold-soft: #d4c3a2;     /* for surfaces / divider */
+
+  /* Warm neutrals (stone, not cool gray) */
+  --paper: #f7f3ec;         /* primary page background */
+  --paper-2: #ede6d9;       /* secondary band */
+  --bone: #faf6ee;          /* card surface */
+  --stone: #d9cfbd;         /* divider tint */
+  --ink: #1a1a1a;           /* body text */
+  --ink-2: #4a4a4a;         /* secondary text */
+  --ink-3: #7a7770;         /* meta */
+  --hairline: #e0d7c6;      /* 1px rules on paper */
+  --hairline-dark: rgba(255,255,255,0.14);
+
+  /* Semantic */
+  --bg: var(--paper);
+  --surface: var(--bone);
+  --fg: var(--ink);
+  --fg-muted: var(--ink-2);
+  --fg-meta: var(--ink-3);
+
+  /* Type */
+  --font-display: "Playfair Display", "Iowan Old Style", Georgia, serif;
+  --font-body: "Inter", "Helvetica Neue", system-ui, sans-serif;
+
+  /* Scale (desktop; mobile steps via clamp) */
+  --t-hero: clamp(44px, 6.5vw, 84px);
+  --t-display: clamp(36px, 4.2vw, 56px);
+  --t-h1: clamp(32px, 3.4vw, 44px);
+  --t-h2: clamp(26px, 2.4vw, 34px);
+  --t-h3: clamp(20px, 1.6vw, 24px);
+  --t-lede: clamp(18px, 1.35vw, 20px);
+  --t-body: 16px;
+  --t-small: 14px;
+  --t-eyebrow: 12px;
+
+  /* Spacing (8px base) */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 16px;
+  --s-4: 24px;
+  --s-5: 32px;
+  --s-6: 48px;
+  --s-7: 64px;
+  --s-8: 96px;
+  --s-9: 128px;
+
+  /* Layout */
+  --container: 1200px;
+  --container-reading: 760px;
+  --radius: 2px;
+  --radius-md: 4px;
+
+  /* Elevation */
+  --shadow-sm: 0 1px 2px rgba(25,40,63,0.06), 0 2px 6px rgba(25,40,63,0.04);
+  --shadow-md: 0 2px 6px rgba(25,40,63,0.08), 0 10px 24px rgba(25,40,63,0.08);
+  --shadow-lg: 0 6px 20px rgba(25,40,63,0.12), 0 20px 60px rgba(25,40,63,0.14);
+
+  /* Overlays (consolidated from 8 down to 3) */
+  --overlay-subtle: rgba(25,40,63,0.30);
+  --overlay-base: rgba(25,40,63,0.55);
+  --overlay-strong: rgba(25,40,63,0.82);
+
+  /* Motion */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 160ms;
+  --dur: 240ms;
+  --dur-slow: 480ms;
+
+  /* Focus */
+  --focus: 2px solid var(--gold);
+  --focus-offset: 3px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: var(--font-body);
+  font-size: var(--t-body);
+  line-height: 1.6;
+  color: var(--fg);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  margin: 0;
+  color: var(--navy);
+  line-height: 1.12;
+  text-wrap: balance;
+}
+h1 { font-size: var(--t-h1); }
+h2 { font-size: var(--t-h2); }
+h3 { font-size: var(--t-h3); }
+p { margin: 0; }
+p + p { margin-top: var(--s-3); }
+
+a { color: var(--navy); text-decoration: none; border-bottom: 1px solid var(--gold); transition: border-color var(--dur) var(--ease), color var(--dur) var(--ease); }
+a:hover { color: var(--gold-deep); border-bottom-color: var(--gold-deep); }
+
+:focus-visible { outline: var(--focus); outline-offset: var(--focus-offset); }
+
+.container { max-width: var(--container); margin: 0 auto; padding: 0 var(--s-5); }
+.container-reading { max-width: var(--container-reading); margin: 0 auto; padding: 0 var(--s-5); }
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: var(--t-eyebrow);
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+}
+.display { font-family: var(--font-display); font-weight: 300; font-size: var(--t-display); letter-spacing: -0.015em; line-height: 1.05; }
+.hero-display { font-family: var(--font-display); font-weight: 300; font-size: var(--t-hero); letter-spacing: -0.02em; line-height: 1.02; }
+
+.hairline { height: 1px; background: var(--hairline); border: 0; margin: 0; }
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  padding: 14px 22px;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all var(--dur) var(--ease);
+  text-decoration: none;
+  line-height: 1;
+  white-space: nowrap;
+}
+.btn-primary { background: var(--navy); color: var(--paper); border-color: var(--navy); }
+.btn-primary:hover { background: var(--navy-ink); color: var(--paper); border-color: var(--navy-ink); }
+.btn-gold { background: var(--gold); color: var(--navy); border-color: var(--gold); }
+.btn-gold:hover { background: var(--gold-deep); color: var(--navy); border-color: var(--gold-deep); }
+.btn-ghost { background: transparent; color: var(--navy); border-color: var(--navy); }
+.btn-ghost:hover { background: var(--navy); color: var(--paper); }
+.btn-link { background: transparent; color: var(--navy); padding: 8px 0; border: 0; border-bottom: 1px solid var(--gold); border-radius: 0; }
+.btn-link:hover { border-bottom-color: var(--navy); color: var(--navy); }
+
+/* Utility */
+.eyebrow-line { display: inline-flex; align-items: center; gap: 12px; }
+.eyebrow-line::before { content: ""; width: 28px; height: 1px; background: var(--gold); }
+
+.tag {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--navy);
+  padding: 6px 10px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  background: var(--bone);
+}
+
+.prose p { font-size: 17px; line-height: 1.7; color: var(--ink-2); }
+.prose p + p { margin-top: var(--s-3); }
+.prose h2 { margin-top: var(--s-6); margin-bottom: var(--s-3); }
+.prose h3 { margin-top: var(--s-5); margin-bottom: var(--s-2); color: var(--navy); }
+.prose ul { padding-left: 1.2em; margin: var(--s-3) 0; }
+.prose li { margin-bottom: 8px; color: var(--ink-2); line-height: 1.7; }
+.prose strong { color: var(--navy); font-weight: 600; }
+
+/* Hairline divider accent */
+.rule-gold { display: block; width: 48px; height: 2px; background: var(--gold); border: 0; }

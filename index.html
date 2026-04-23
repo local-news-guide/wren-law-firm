@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=1600" />
+<title>Wren Law Firm — 2026 Redesign</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,500;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="components.css">
+<style>
+  body { background: #d8d2c3; }
+  .wl-design-frame { padding: 32px 24px 80px; }
+  .dc-artboard-inner { background: var(--paper); }
+  .artboard-mobile { box-shadow: var(--shadow-lg); }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script src="copy.js"></script>
+<script type="text/babel" src="chrome.jsx"></script>
+<script type="text/babel" src="pages.jsx"></script>
+<script type="text/babel" src="app.jsx"></script>
+<script type="text/babel" src="design-canvas.jsx"></script>
+
+<script type="text/babel" data-presets="react">
+const { useState, useEffect } = React;
+
+function ArtboardHome({ lang = "en", mobile = false, variant = "heroCredibility" }) {
+  return <WrenApp initialLang={lang} initialPage="home" forceMobile={mobile} heroVariantOverride={variant} />;
+}
+function ArtboardPage({ lang = "en", page = "home", mobile = false }) {
+  return <WrenApp initialLang={lang} initialPage={page} forceMobile={mobile} />;
+}
+
+// Desktop canvas — 1400 x 3000ish per artboard
+const DESKTOP_W = 1440;
+const MOBILE_W = 390;
+
+function Canvas() {
+  return (
+    <DesignCanvas>
+      <DCSection id="hero-variants" title="01 — Homepage hero variants (English)">
+        <DCArtboard id="home-credibility" label="Credibility · 29 years" width={DESKTOP_W} height={900}>
+          <ArtboardHome lang="en" variant="heroCredibility" />
+        </DCArtboard>
+        <DCArtboard id="home-offer" label="Offer · 25% fee" width={DESKTOP_W} height={900}>
+          <ArtboardHome lang="en" variant="heroOffer" />
+        </DCArtboard>
+        <DCArtboard id="home-human" label="Human · from Dan" width={DESKTOP_W} height={900}>
+          <ArtboardHome lang="en" variant="heroHuman" />
+        </DCArtboard>
+        <DCArtboard id="home-urgent" label="Urgent · call now" width={DESKTOP_W} height={900}>
+          <ArtboardHome lang="en" variant="heroUrgent" />
+        </DCArtboard>
+      </DCSection>
+
+      <DCSection id="home-full" title="02 — Homepage (full scroll)">
+        <DCArtboard id="home-en-desktop" label="English · desktop" width={DESKTOP_W} height={5200}>
+          <ArtboardPage lang="en" page="home" />
+        </DCArtboard>
+        <DCArtboard id="home-es-desktop" label="Español · desktop" width={DESKTOP_W} height={5200}>
+          <ArtboardPage lang="es" page="home" />
+        </DCArtboard>
+        <DCArtboard id="home-en-mobile" label="English · mobile" width={MOBILE_W + 40} height={6400}>
+          <div className="artboard-mobile"><ArtboardPage lang="en" page="home" mobile={true} /></div>
+        </DCArtboard>
+        <DCArtboard id="home-es-mobile" label="Español · mobile" width={MOBILE_W + 40} height={6400}>
+          <div className="artboard-mobile"><ArtboardPage lang="es" page="home" mobile={true} /></div>
+        </DCArtboard>
+      </DCSection>
+
+      <DCSection id="pi" title="03 — Personal Injury detail">
+        <DCArtboard id="pi-en-desktop" label="English · desktop" width={DESKTOP_W} height={3400}>
+          <ArtboardPage lang="en" page="pi" />
+        </DCArtboard>
+        <DCArtboard id="pi-es-desktop" label="Español · desktop" width={DESKTOP_W} height={3400}>
+          <ArtboardPage lang="es" page="pi" />
+        </DCArtboard>
+        <DCArtboard id="pi-en-mobile" label="English · mobile" width={MOBILE_W + 40} height={4600}>
+          <div className="artboard-mobile"><ArtboardPage lang="en" page="pi" mobile={true} /></div>
+        </DCArtboard>
+        <DCArtboard id="pi-es-mobile" label="Español · mobile" width={MOBILE_W + 40} height={4600}>
+          <div className="artboard-mobile"><ArtboardPage lang="es" page="pi" mobile={true} /></div>
+        </DCArtboard>
+      </DCSection>
+
+      <DCSection id="contact" title="04 — Contact">
+        <DCArtboard id="contact-en-desktop" label="English · desktop" width={DESKTOP_W} height={1900}>
+          <ArtboardPage lang="en" page="contact" />
+        </DCArtboard>
+        <DCArtboard id="contact-es-desktop" label="Español · desktop" width={DESKTOP_W} height={1900}>
+          <ArtboardPage lang="es" page="contact" />
+        </DCArtboard>
+        <DCArtboard id="contact-en-mobile" label="English · mobile" width={MOBILE_W + 40} height={2600}>
+          <div className="artboard-mobile"><ArtboardPage lang="en" page="contact" mobile={true} /></div>
+        </DCArtboard>
+        <DCArtboard id="contact-es-mobile" label="Español · mobile" width={MOBILE_W + 40} height={2600}>
+          <div className="artboard-mobile"><ArtboardPage lang="es" page="contact" mobile={true} /></div>
+        </DCArtboard>
+      </DCSection>
+
+      <DCSection id="about-team" title="05 — About, Practice index, Team, WC, SSD">
+        <DCArtboard id="about-en" label="About · English" width={DESKTOP_W} height={3800}>
+          <ArtboardPage lang="en" page="about" />
+        </DCArtboard>
+        <DCArtboard id="about-es" label="About · Español" width={DESKTOP_W} height={3800}>
+          <ArtboardPage lang="es" page="about" />
+        </DCArtboard>
+        <DCArtboard id="practice-en" label="Practice index · EN" width={DESKTOP_W} height={2200}>
+          <ArtboardPage lang="en" page="practice" />
+        </DCArtboard>
+        <DCArtboard id="practice-es" label="Practice index · ES" width={DESKTOP_W} height={2200}>
+          <ArtboardPage lang="es" page="practice" />
+        </DCArtboard>
+        <DCArtboard id="team-en" label="Team · English" width={DESKTOP_W} height={1800}>
+          <ArtboardPage lang="en" page="team" />
+        </DCArtboard>
+        <DCArtboard id="team-es" label="Team · Español" width={DESKTOP_W} height={1800}>
+          <ArtboardPage lang="es" page="team" />
+        </DCArtboard>
+        <DCArtboard id="wc-en" label="Workers' Comp · EN" width={DESKTOP_W} height={3200}>
+          <ArtboardPage lang="en" page="wc" />
+        </DCArtboard>
+        <DCArtboard id="wc-es" label="Workers' Comp · ES" width={DESKTOP_W} height={3200}>
+          <ArtboardPage lang="es" page="wc" />
+        </DCArtboard>
+        <DCArtboard id="ssd-en" label="SSD · English" width={DESKTOP_W} height={3400}>
+          <ArtboardPage lang="en" page="ssd" />
+        </DCArtboard>
+        <DCArtboard id="ssd-es" label="SSD · Español" width={DESKTOP_W} height={3400}>
+          <ArtboardPage lang="es" page="ssd" />
+        </DCArtboard>
+      </DCSection>
+
+      <DCSection id="blog-legal" title="06 — Blog + Legal (P2)">
+        <DCArtboard id="blog-en" label="Journal · English" width={DESKTOP_W} height={1700}>
+          <ArtboardPage lang="en" page="blog" />
+        </DCArtboard>
+        <DCArtboard id="blog-es" label="Journal · Español" width={DESKTOP_W} height={1700}>
+          <ArtboardPage lang="es" page="blog" />
+        </DCArtboard>
+        <DCArtboard id="post-en" label="Post detail · EN" width={DESKTOP_W} height={2600}>
+          <ArtboardPage lang="en" page="post:7-steps-after-a-car-accident" />
+        </DCArtboard>
+        <DCArtboard id="post-es" label="Post detail · ES" width={DESKTOP_W} height={2600}>
+          <ArtboardPage lang="es" page="post:7-steps-after-a-car-accident" />
+        </DCArtboard>
+        <DCArtboard id="privacy-en" label="Privacy · English" width={DESKTOP_W} height={1400}>
+          <ArtboardPage lang="en" page="privacy" />
+        </DCArtboard>
+        <DCArtboard id="terms-en" label="Terms · English" width={DESKTOP_W} height={1400}>
+          <ArtboardPage lang="en" page="terms" />
+        </DCArtboard>
+      </DCSection>
+    </DesignCanvas>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<Canvas />);
+</script>
+</body>
+</html>
